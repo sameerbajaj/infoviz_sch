@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8" />
+      <title>San Francisco Rainfall</title>
+
+      <!-- Remember to edit the CSS so that your result looks similar
+      to expectedresult.png -->
+      <link rel="stylesheet" href="_css/main.css">
+
+      <script src="_js/jquery-1.11.0.min.js"></script>
+      <script src="_js/highcharts.js"></script>
+  </head>
+
+  <body>
+
+    <div id="wrapper">
+      <h1>San Francisco Rainfall - 2000 to 2015</h1>
+
+      <!-- ADD your first and last name -->
+      <p>by Sameer Bajaj</p>
+
+      <!-- 
+      ADD two div containers, one for each chart.
+      Make sure you adjust the CSS so that the end result looks
+      similar to expectedresult.png. The two charts should be side-by-side. 
+      If you are having issues make sure your browser is not zoomed in past 100%.
+      -->
+      <div class='container'>
+      <div id="chart-one-container">asd</div>
+      <div id="chart-two-container"><a href="https://br.linkedin.com/in/danilosabbagh" target="new">my linkedin</a>
+      </div>
+      <div id="clear"></div>
+</div>
+
+    </div>
+
+    <script>
+
+    // Here we are declaring a function using Highcharts.setOptions
+    // This configures global options that will apply for both charts.
+    // These options work like a style theme.
+    // http://www.highcharts.com/docs/getting-started/how-to-set-options#2
+    $(function () {
+      Highcharts.setOptions({
+        chart: {
+          style: {
+            fontFamily: "Helvetica,Arial,sans-serif"
+          }
+        },
+        legend: {
+          borderRadius: 0,
+          itemStyle: {
+            color: "#000000",
+            fontFamily: "Helvetica,Arial,sans-serif"
+          }
+        },
+        title: {
+          style: {
+            color: "#000000",
+            fontFamily: "Helvetica,Arial,sans-serif",
+            fontSize: "20px",
+            fontWeight: "bold"
+          }
+        },
+        tooltip: {
+          // ADD CODE HERE to set up the tooltip options.
+            // Hints: borderRadius, borderWidth, shadow
+
+          style: {
+            color: "#333333",
+            fontFamily: "Arial, sans-serif",
+            fontSize: "14px",
+            padding: "10px"
+          }
+        },
+        xAxis: {
+          labels: {
+            style: {
+              color: "#333333",
+              fontFamily: "Helvetica,Arial,sans-serif"
+            }
+          },
+        },
+        yAxis: {
+          labels: {
+            style: {
+              color: "#333333",
+              fontFamily: "Helvetica,Arial,sans-serif"
+            }
+          },
+          min: 0,
+          plotLines: [{
+            value: 0,
+            width: 1,
+            color: "#808080"
+          }],
+          title: {
+            style: {
+              color: "#333333",
+              fontFamily: "Helvetica,Arial,sans-serif"
+            },
+            text: "Inches of Rain"
+          }
+        }
+      })
+    });
+
+    // Set up an options object that will hold the charts' shared xAxis categories
+    var options = {
+      // ADD CODE HERE to hold the xAxis categories
+      categories: ['2000', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+    };
+
+    // Configure Chart One
+    // Chart One is a stacked bar chart depicting seasonal rainfall from 2000 to 2015.
+    var chartOne = {
+      chart: {
+        // ADD CODE HERE to fill in the renderTo property with the div ID for your first chart container
+        // ADD CODE HERE to fill in the type property to make a bar chart
+        renderTo: chart-one-container,
+        type: 'bar'
+      },
+      title: {
+        text: "Seasonal Rainfall"
+      },
+      plotOptions: {
+        series: {
+          stacking: "normal" // vs. "percent"
+        }
+      },
+      series: [] // This series data is pulled through a for loop that loops through the CSV.
+    };
+
+    // Configure Chart Two
+    // Chart Two is a line chart showing the total annual rainfall from 2000 to 2015.
+    var chartTwo = {
+      chart: {
+        // ADD CODE HERE to fill in the renderTo property with the div id for your second chart container
+        // ADD CODE HERE to fill in the type property to make a line chart
+        renderTo: 
+        type: 
+      },
+      title: {
+        text: "Annual Rainfall"
+      },
+      series: [] // The series data for this chart is the last column of data in the CSV - the "Annual" column.
+    };
+
+    // Here we are declaring a function to return color for each season.
+    // This allows us to choose the colors that will be used in the charts.
+    function colors(i) {
+      switch(i) {
+        case 0:
+          return "#1F77B4"; // winter
+          break;
+        case 1:
+          return "#DBDD8D"; // spring
+          break;
+        case 2:
+          return "#2CA02C"; // summer
+          break;
+        case 3:
+          return "#D62728"; // fall
+      };
+    };
+
+    // ADD CODE HERE to use jQuery $.get() method to pull data from the CSV file.
+    $.get("_data/SF_rainfall_seasons.csv", function (data) {
+
+      // We'll split the CSV by line ("\n")
+      var lines = data.split('\n');
+
+      // ADD CODE HERE to set up variables for the Chart One data:
+        // Declare a variable "seasons" that is an empty array that will be populated by the season names.
+        // Declare a variable "rainBySeason" that is an array containing 4 empty arrays, each of will be populated by rainfall sums per season (e.g. [17.41, 13.07, 6.99, ...] for winter).
+      
+
+      // ADD CODE HERE to set up variables for the Chart Two data:
+        // Declare a variable "annual" that is an empty array that will hold a single name for the annual header.
+        // Declare a variable "annualRain" that is an array containing 1 empty array with all the numbers from the annual column of data (e.g. [25.01, 31.79, 22.46, ...]).
+     
+
+      // Now we want to loop through the data that we pulled in using .get()
+      // We already split it on newlines above so we have an array for each line of the CSV.
+
+      // ADD CODE HERE to loop through each line in var lines using $.each
+        // Remember that the first argument to .each() is the iterator so you need to list two arguments lineNo and line
+      
+
+        // Now you are looping through a line at a time and turning each line 
+        // into an array that contains 6 items:
+        // Year value, Winter value, Spring value, Summer value, Fall value, Annual value
+        // We'll use the .split() method to split the line on commas */
+        var items = line.split(",");
+
+        // The first line of our file is the data's header row which we don't want to read as data.
+        // Instead, if the lineNo is 0, we want to add the values in the array to the seasons variable.
+        // Use an if statement to treat the first line of your CSV differently.
+        
+        // If it's the header...
+        if (lineNo == 0) {
+          
+          // ADD CODE HERE to loop through the values Set the "seasons" variable as the appropriate values from the header line
+            // Do not include the header Year or Annual
+          for (var i = 1; i < 5; i++) {
+              seasons.push(items[i]); // seasons = [Winter, Spring, Summer, Fall]
+          }
+
+          // We'll set the "annual" variable to the header Annual
+          annual.push(items[5]);
+          
+        // Otherwise, if you're working with content...
+        } else {
+          
+          // Now we need to populate "options.xAxis.categories" array with the Years ("2000", "2001", "2002", etc.)
+          // Each line of data is a year so we want to add the first value in the array to the xAxis categories.
+
+          // ADD CODE HERE to push the year from each line to xAxis categories as you loop
+          
+          
+          // We'll populate the "rainBySeason" array.
+          // We'll push the Winter rain value to rainBySeason[0], Spring rain value to rainBySeason[1], Summer rain value to rainBySeason[2], and the Fall rain value to rainBySeason[3]
+          for (var i = 0; i < 4; i++) {
+            rainBySeason[i].push(parseFloat(items[i+1]));
+          };
+
+          // Here we want to populate the "annualRain" array with the last column of data for each year.
+          
+          // ADD CODE HERE to push the Annual values into annualRain[0], you need to use annualRain[0] because annualRain is an array within an array (so that it matches the rainBySeason structure)
+            // Make sure to turn the values into numbers using parseFloat() or Number()
+
+
+        };
+
+      });
+
+      // Chart One Data:
+      // http://www.highcharts.com/demo/bar-stacked
+      // "chartOne.series", which was declared in chartOne above, is going to be an array where each item is an object with 3 main keys: "name", "data", & "color":
+          // "name" = season name
+          // "data" = rain value for a season
+          // "color" = bar segment color
+
+      // We'll use a for loop to populate "chartOne.series"
+      for(var i = 0; i < rainBySeason.length; i++) {
+        
+        // We'll create a placeholder object and pull the required value for each key from "seasons" variable, "rainBySeason" variable, & "colors()" function.
+        // There is a strange quirk with Highcharts that plots the values for each bar in reversed order. To fix this, we set the following keys and values in the loop:
+          // index: rainBySeason.length - 1 - i,
+          // legendIndex: i
+        var chartOneData = {
+          name: seasons[i],
+          data: rainBySeason[i],
+          color: colors(i),
+          index: rainBySeason.length - 1 - i,
+          legendIndex: i
+        };
+        
+        // ADD CODE HERE to push the chartOneData object to "chartOne.series":
+
+
+      };
+
+      // Chart Two Data:
+      // http://www.highcharts.com/demo/line-basic
+      // "chartTwo.series" is an array. For line charts in Highcharts, the series data is an array with 2 keys: "name" (a string) and "data" (an array).
+      var chartTwoData = {
+        name: 'Annual',
+        data: annualRain[0]
+      };
+
+      // ADD CODE HERE to push the chartTwoData to "chartTwo.series":
+
+
+      // Here we are using jQuery's extend method to merge the contents of our options object which apply to both charts with the specific options and data we set for each chart. 
+      chartOne = jQuery.extend(true, {}, options, chartOne);
+      chartTwo = jQuery.extend(true, {}, options, chartTwo);
+
+      // Now we need to draw both charts by creating new "Highcharts" objects:
+
+      // ADD CODE HERE to declare a variable for chart 1 and use the Highcharts.Chart constructor to create your chart using the chart variable we created using jQuery.extend above.
+
+      // ADD CODE HERE to declare a variable for chart 2 using the chart constructor and the chart object created above for chart 2
+
+
+    });
+
+
+    </script>
+
+  </body>
+
+</html>
