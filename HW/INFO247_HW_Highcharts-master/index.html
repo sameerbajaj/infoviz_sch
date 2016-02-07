@@ -27,12 +27,9 @@
       If you are having issues make sure your browser is not zoomed in past 100%.
       -->
       <div class='container'>
-      <div id="chart-one-container">asd</div>
-      <div id="chart-two-container"><a href="https://br.linkedin.com/in/danilosabbagh" target="new">my linkedin</a>
+      <div id="chart-one-container"></div>
+      <div id="chart-two-container"></a>
       </div>
-      <div id="clear"></div>
-</div>
-
     </div>
 
     <script>
@@ -65,8 +62,12 @@
         },
         tooltip: {
           // ADD CODE HERE to set up the tooltip options.
-            // Hints: borderRadius, borderWidth, shadow
 
+            // Hints: borderRadius, borderWidth, shadow
+          borderWidth: 1,
+          borderRadius: 1,
+          shadow: true,
+            
           style: {
             color: "#333333",
             fontFamily: "Arial, sans-serif",
@@ -109,7 +110,9 @@
     // Set up an options object that will hold the charts' shared xAxis categories
     var options = {
       // ADD CODE HERE to hold the xAxis categories
-      categories: ['2000', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+      xAxis: {
+        categories: ['2000', '2001', '2002', '2003', '2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015']
+      }
     };
 
     // Configure Chart One
@@ -118,7 +121,7 @@
       chart: {
         // ADD CODE HERE to fill in the renderTo property with the div ID for your first chart container
         // ADD CODE HERE to fill in the type property to make a bar chart
-        renderTo: chart-one-container,
+        renderTo: 'chart-one-container',
         type: 'bar'
       },
       title: {
@@ -138,8 +141,8 @@
       chart: {
         // ADD CODE HERE to fill in the renderTo property with the div id for your second chart container
         // ADD CODE HERE to fill in the type property to make a line chart
-        renderTo: 
-        type: 
+        renderTo: 'chart-two-container',
+        type: 'line'
       },
       title: {
         text: "Annual Rainfall"
@@ -174,17 +177,21 @@
       // ADD CODE HERE to set up variables for the Chart One data:
         // Declare a variable "seasons" that is an empty array that will be populated by the season names.
         // Declare a variable "rainBySeason" that is an array containing 4 empty arrays, each of will be populated by rainfall sums per season (e.g. [17.41, 13.07, 6.99, ...] for winter).
-      
+      var seasons = [];
+      var rainBySeason = [[],[],[],[]];
 
       // ADD CODE HERE to set up variables for the Chart Two data:
         // Declare a variable "annual" that is an empty array that will hold a single name for the annual header.
         // Declare a variable "annualRain" that is an array containing 1 empty array with all the numbers from the annual column of data (e.g. [25.01, 31.79, 22.46, ...]).
-     
+     var annual = [];
+     var annualRain = [[]];
+
 
       // Now we want to loop through the data that we pulled in using .get()
       // We already split it on newlines above so we have an array for each line of the CSV.
 
       // ADD CODE HERE to loop through each line in var lines using $.each
+      $.each(lines,function(lineNo,line) {
         // Remember that the first argument to .each() is the iterator so you need to list two arguments lineNo and line
       
 
@@ -202,6 +209,7 @@
         if (lineNo == 0) {
           
           // ADD CODE HERE to loop through the values Set the "seasons" variable as the appropriate values from the header line
+          $.each(items, function (itemNo, item) {
             // Do not include the header Year or Annual
           for (var i = 1; i < 5; i++) {
               seasons.push(items[i]); // seasons = [Winter, Spring, Summer, Fall]
@@ -209,7 +217,8 @@
 
           // We'll set the "annual" variable to the header Annual
           annual.push(items[5]);
-          
+        
+        });
         // Otherwise, if you're working with content...
         } else {
           
@@ -217,7 +226,7 @@
           // Each line of data is a year so we want to add the first value in the array to the xAxis categories.
 
           // ADD CODE HERE to push the year from each line to xAxis categories as you loop
-          
+          options.xAxis.categories.push(items);
           
           // We'll populate the "rainBySeason" array.
           // We'll push the Winter rain value to rainBySeason[0], Spring rain value to rainBySeason[1], Summer rain value to rainBySeason[2], and the Fall rain value to rainBySeason[3]
@@ -228,6 +237,7 @@
           // Here we want to populate the "annualRain" array with the last column of data for each year.
           
           // ADD CODE HERE to push the Annual values into annualRain[0], you need to use annualRain[0] because annualRain is an array within an array (so that it matches the rainBySeason structure)
+          annualRain[0].push(parseFloat(items[5]));
             // Make sure to turn the values into numbers using parseFloat() or Number()
 
 
@@ -258,7 +268,7 @@
         };
         
         // ADD CODE HERE to push the chartOneData object to "chartOne.series":
-
+        chartOne.series.push(chartOneData);
 
       };
 
@@ -271,7 +281,7 @@
       };
 
       // ADD CODE HERE to push the chartTwoData to "chartTwo.series":
-
+      chartTwo.series.push(chartTwoData);
 
       // Here we are using jQuery's extend method to merge the contents of our options object which apply to both charts with the specific options and data we set for each chart. 
       chartOne = jQuery.extend(true, {}, options, chartOne);
@@ -280,9 +290,10 @@
       // Now we need to draw both charts by creating new "Highcharts" objects:
 
       // ADD CODE HERE to declare a variable for chart 1 and use the Highcharts.Chart constructor to create your chart using the chart variable we created using jQuery.extend above.
+      var chartonee = new Highcharts.Chart(chartOne);
 
       // ADD CODE HERE to declare a variable for chart 2 using the chart constructor and the chart object created above for chart 2
-
+      var charttwoo = new Highcharts.Chart(chartTwo);
 
     });
 

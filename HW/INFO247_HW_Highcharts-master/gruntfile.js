@@ -8,7 +8,7 @@ module.exports = function (grunt) {
                 livereload: true
             },
             html: {
-                files: ['F:/Programming/infoviz/week1/INFO247_HW_Highcharts-master/*.*', 'F:/Programming/infoviz/week1/INFO247_HW_Highcharts-master/_css/*.*', 'F:/Programming/infoviz/week1/INFO247_HW_Highcharts-master/_js/*.*']
+                files: ['F:/Programming/infoviz/HW/INFO247_HW_Highcharts-master/*.*', 'F:/Programming/infoviz/HW/INFO247_HW_Highcharts-master/*/*.*']
             }
         },
         // Run a connect server with livereload on http://0.0.0.0:8888
