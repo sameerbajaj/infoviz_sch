@@ -74,7 +74,7 @@ p {
 }
 
 .container {
-    width: 92%;
+    width: 97.5%;
     margin: auto;
 }
 
@@ -90,21 +90,22 @@ Also, add settings for the height, width, padding, margin, and border-radius so 
 
 #chart-one-container {
  	background-color: #eeeeee;
+    border: 20px solid;
+    border-color: #EEEEEE;
     border-radius: 15px;
  	width: 600px;
     float: left;
     height: 450px;
-    color: black;
 
 }
 
 #chart-two-container {
  	background-color: #eeeeee;
- 	border: 2px solid;
+ 	border: 20px solid;
+    border-color: #EEEEEE;
     border-radius: 15px;
  	width: 600px;
     float: right;
     height: 450px;
-    color: white;
 
 }

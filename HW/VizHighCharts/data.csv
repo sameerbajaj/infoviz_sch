@@ -1,0 +1,25 @@
+Subject,Fall2010,Spring2011,Fall2011,Spring2012,Fall2012,Spring2013,Fall2012,Spring2014,Fall2014,Spring2015
+Biology_actual,246,253,376,384,388,394,394,394,201,
+Biology_projected,250,255,265,270,275,280,290,300,310,400
+Biology_rennovated,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,No,
+Computer Science_actual,524,458,503,489,600,512,479,484,247,
+Computer Science_projected,510,475,505,480,480,510,485,485,490,490
+Computer Science_rennovated,No,Yes,No,Yes,Yes,Yes,Yes,Yes,No,
+Economics_actual,99,97,97,104,152,89,90,86,73,
+Economics_projected,100,100,100,100,100,100,100,100,150,150
+Economics_rennovated,No,Yes,No,No,Yes,No,No,No,No,
+English_actual,193,195,174,166,168,200,210,208,87,
+English_projected,190,190,170,170,180,190,200,200,190,200
+English_rennovated,No,No,Yes,Yes,No,Yes,Yes,Yes,No,
+Math_actual,463,472,488,490,534,557,563,552,263,
+Math_projected,450,450,475,475,500,500,500,500,500,500
+Math_rennovated,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,No,
+Physics_actual,96,95,98,101,109,110,112,112,66,
+Physics_projected,100,100,110,110,110,120,120,120,120,120
+Physics_rennovated,No,No,No,No,No,No,No,Yes,No,
+Scandinavian_actual,29,28,27,26,26,25,25,26,13,
+Scandinavian_projected,35,35,36,36,36,37,37,37,38,38
+Scandinavian_rennovated,No,No,No,No,No,No,No,No,No,
+Yoga_actual,51,64,53,50,50,48,47,49,25,
+Yoga_projected,50,50,51,51,51,52,52,52,53,53
+Yoga_rennovated,No,No,No,No,No,No,No,No,No,

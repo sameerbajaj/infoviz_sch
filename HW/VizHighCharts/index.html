@@ -1,0 +1,606 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">  
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <style type="text/css">
+  </style>
+
+  <title>Student Enrollments</title>
+
+
+<script type='text/javascript'>
+    
+  $.get("data.csv", function (data) {
+
+
+
+  var WHEN = "GREATER_ONLY";
+  var WHEN1 = "GREATER_ONLY";
+  
+  var xAxisValues = [1,2,3,4,5,6,7,8,9,10];
+  var biologyActual = [];
+  
+  var biologyProjected = [];
+
+  var computerProjected = [];
+  var minStudents = 0;
+  var maxStudents = 600;
+
+  var computerActual = [];
+
+  var economicsActual = [];
+  var economicsProjected = [];
+
+  var englishActual = [];
+  var englishProjected = [];
+
+  var mathActual = [];
+  var mathProjected = [];
+
+  var physicsActual = [];
+  var physicsProjected = [];
+
+  var scandinavianActual = [];
+  var scandinavianProjected = [];
+
+  var yogaActual = [];
+  var yogaProjected = [];
+
+
+    var lines = data.split('\n');
+    $.each(lines,function(lineNo,line) {
+      var items = line.split(",");
+      // if (lineNo == 1 ){ 
+
+      //   for (var i = 1; i < 10; i++) {
+      //     biologyActual.push(parseFloat(items[i]));
+      //   }
+
+        
+      
+      // }
+
+      switch(lineNo){
+
+        case 1:
+          for (var i = 1; i < 10; i++) {
+            biologyActual.push(parseFloat(items[i]));
+          }
+          break;
+        case 2:
+          for (var i = 1; i < 11; i++) {
+            biologyProjected.push(parseFloat(items[i]));
+          }
+          break;
+        case 4:
+          for (var i = 1; i < 10; i++) {
+            computerActual.push(parseFloat(items[i]));
+          }
+          break;
+        case 5:
+          for (var i = 1; i < 11; i++) {
+            computerProjected.push(parseFloat(items[i]));
+          }
+          break;
+        case 7:
+          for (var i = 1; i < 10; i++) {
+            economicsActual.push(parseFloat(items[i]));
+          }
+          break;
+        case 8:
+          for (var i = 1; i < 11; i++) {
+            economicsProjected.push(parseFloat(items[i]));
+          }
+          break;
+        case 10:
+          for (var i = 1; i < 10; i++) {
+            englishActual.push(parseFloat(items[i]));
+          }
+          break;
+        case 11:
+          for (var i = 1; i < 11; i++) {
+            englishProjected.push(parseFloat(items[i]));
+          }
+          break;
+        case 13:
+          for (var i = 1; i < 10; i++) {
+            mathActual.push(parseFloat(items[i]));
+          }
+          break;
+        case 14:
+          for (var i = 1; i < 11; i++) {
+            mathProjected.push(parseFloat(items[i]));
+          }
+          break;
+        case 16:
+          for (var i = 1; i < 10; i++) {
+            physicsActual.push(parseFloat(items[i]));
+          }
+          break;
+        case 17:
+          for (var i = 1; i < 11; i++) {
+            physicsProjected.push(parseFloat(items[i]));
+          }
+          break;
+
+        case 19:
+          for (var i = 1; i < 10; i++) {
+            scandinavianActual.push(parseFloat(items[i]));
+          }
+          break;
+        case 20:
+          for (var i = 1; i < 11; i++) {
+            scandinavianProjected.push(parseFloat(items[i]));
+          }
+          break;
+        case 22:
+          for (var i = 1; i < 10; i++) {
+            yogaActual.push(parseFloat(items[i]));
+          }
+          break;
+        case 23:
+          for (var i = 1; i < 11; i++) {
+            yogaProjected.push(parseFloat(items[i]));
+          }
+          break;
+
+      }
+
+
+    });
+
+
+
+
+$('#container').highcharts({
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                text: 'Student Enrollments - Projected vs Actual'
+            },
+            subtitle: {
+            },
+            xAxis: [{
+              categories: ["random","Fall 2010","Spring 2011","Fall 2011","Spring 2012", "Fall 2013", "Spring 2013","Fall 2014","Spring 2014","Fall 2015","Spring 2015"]
+            }],
+            yAxis: { // Secondary yAxis
+                min:minStudents,
+                max:maxStudents,
+                title: {  
+                    text: 'No. of Students',
+                    style: {
+                        color: '#4572A7'
+                    }
+                },
+                labels: {
+                    format: '{value}',
+                    style: {
+                        color: '#4572A7'
+                    }
+                }
+            },
+            tooltip: {
+                // shared: true
+            },
+
+
+            legend: {
+                enabled:true,
+                title: {
+                    text: 'Subjects<br/><span style="font-size: 9px; color: #666; font-weight: normal">(Click to hide)</span><br/><span style="font-size: 9px; color: #666; font-weight: normal">(Shaded area Actual >)</span>',
+                    style: {
+                        fontStyle: 'italic'
+                    }
+                },
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100
+            },
+
+
+            
+            series: [
+            {
+                name: 'Computer Projected',
+                color: '#7aa537',
+                type: 'line',
+                data: computerProjected,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+            createRangeSerie(computerActual, computerProjected, WHEN, xAxisValues),
+            {
+                name: 'Computer Actual',
+                color: '#9bc34a',
+                type: 'line',
+                data: computerActual,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+            {
+                name: 'Biology Projected',
+                color: '#c0ab41',
+                type: 'line',
+                data: biologyProjected,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+    
+            },  
+            createRangeSerie(biologyActual, biologyProjected, WHEN, xAxisValues),
+            {
+
+                name: 'Biology Actual',
+                color: '#cdb669',
+                type: 'line',
+                data: biologyActual,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+
+            {
+                name: 'Economics Actual',
+                color: '#40bf9c',
+                type: 'line',
+                data: economicsActual,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+            {
+                name: 'Economics Projected',
+                color: '#6dcead',
+                type: 'line',
+                data: economicsProjected,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+            createRangeSerie(economicsActual, economicsProjected, WHEN, xAxisValues),
+
+            {
+                name: 'English Actual',
+                color: '#4055bf',
+                type: 'line',
+                data: englishActual,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+            {
+                name: 'English Projected',
+                color: '#6f7ccf',
+                type: 'line',
+                data: englishProjected,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+            createRangeSerie(englishActual, englishProjected, WHEN, xAxisValues),
+
+            {
+                name: 'Math Actual',
+                color: '#a340bf',
+                type: 'line',
+                data: mathActual,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+            {
+                name: 'Math Projected',
+                color: '#a85fca',
+                type: 'line',
+                data: mathProjected,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+            createRangeSerie(mathActual, mathProjected, WHEN, xAxisValues),
+
+            {
+                name: 'Physics Actual',
+                color: '#b93e8d',
+                type: 'line',
+                data: physicsActual,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+            {
+                name: 'Physics Projected',
+                color: '#cd6aa7',
+                type: 'line',
+                data: physicsProjected,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+            createRangeSerie(physicsActual, physicsProjected, WHEN, xAxisValues),
+
+            {
+                name: 'Scandinavian Projected',
+                type: 'line',
+                color: '#bb3e5e',
+                lineWidth: 1,
+                data: scandinavianProjected,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+
+            {
+                name: 'Scandinavian Actual',
+                type: 'line',
+                color: '#c95d7a',
+                data: scandinavianActual,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+            createRangeSerie(scandinavianActual, scandinavianProjected, WHEN, xAxisValues),
+
+            {
+                name: 'Yoga Actual',
+                color: '#bc403f',
+                type: 'line',
+                lineWidth: 1,
+                data: yogaActual,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+            {
+                name: 'Yoga Projected',
+                color: '#c85b63',
+                type: 'line',
+                data: yogaProjected,
+                tooltip: {
+                },
+                pointInterval: xAxisValues[1] - xAxisValues[0],
+          pointStart: xAxisValues[0]
+            },
+            createRangeSerie(yogaActual, yogaProjected, WHEN, xAxisValues),
+
+            ]
+        });
+    });
+    
+    
+    
+
+function createRangeSerie(data1, data2, when, xAxisValues)
+{
+    // console.log(data1, data2);
+    var rangeData = [];
+
+    console.log("hi" + data1);
+    
+    var lastWasGreater;
+    $.each(data1, function(index, value) {
+       var value2 = data2[index];
+        
+       if(value2 > value)
+       {    
+          if(lastWasGreater)
+          { //lines crossed we need to add the intersection point !
+              
+              var previousValue2 = data2[index-1];
+              var point = intersectionPoint({x:xAxisValues[index], y:value},                                   
+                                            {x:xAxisValues[index-1], y:data1[index-1]},
+                                            {x:xAxisValues[index],y:value2},
+                                            {x:xAxisValues[index-1], y:previousValue2});
+              // console.log(point);
+               rangeData.push([point.x, point.y, point.y]);
+          }
+          if(when == "GREATER_ONLY" ) value2 = value;
+          lastWasGreater = false;
+       }
+       else if(value2 < value)
+       {
+          if(typeof lastWasGreater != 'undefined' && !lastWasGreater)
+          { //lines crossed we need to add the intersection point !
+              var previousValue2 = data2[index-1];
+              var point = intersectionPoint({x:xAxisValues[index], y:value},                                   
+                                            {x:xAxisValues[index-1], y:data1[index-1]},
+                                            {x:xAxisValues[index],y:value2},
+                                            {x:xAxisValues[index-1], y:previousValue2});
+               console.log(point);
+              rangeData.push([point.x, point.y, point.y]);
+          }
+           
+           if (when == "LOWER_ONLY" ) value2 = value;
+           lastWasGreater = true;
+       }
+       rangeData.push([xAxisValues[index], value, value2]);
+    });    
+    
+    //return the third serie, used to fill the area between our 2 series.
+
+    switch(data1[0]) {
+
+        case 246:
+            return {
+          name: 'Biology Shaded',
+          type: 'arearange',
+          data: rangeData,
+          color: '#c0ab41',
+
+         };
+        break;
+
+
+        case 524:
+        return {
+          name: 'Computer Shaded',
+          type: 'arearange',
+          data: rangeData,
+          color: '#9bc34a',
+
+         };
+        break;
+
+        case 99:
+         return {
+          name: 'Economics Shaded',
+          type: 'arearange',
+          data: rangeData,
+          color: '#6dcead',
+
+         };
+        break;
+
+
+        case 193:
+        return {
+          name: 'English Shaded',
+          type: 'arearange',
+          data: rangeData,
+          color: '#6f7ccf',
+
+         };
+        break;
+
+        case 463:
+
+        return {
+          name: 'Math Shaded',
+          type: 'arearange',
+          data: rangeData,
+          color: '#a85fca',
+
+         };
+        break;
+
+        case 96:
+        return {
+          name: 'Physics Shaded',
+          type: 'arearange',
+          data: rangeData,
+          color: '#cd6aa7',
+
+         };
+        break;
+
+
+        case 29:
+
+        return {
+          name: 'Scandinavian Shaded',
+          type: 'arearange',
+          data: rangeData,
+          color: '#bb3e5e',
+
+         };
+        break;
+
+        case 51:
+
+        return {
+          name: 'Yoga Shaded',
+          type: 'arearange',
+          data: rangeData,
+          color: '#c85b63',
+
+         };
+        break;
+
+
+        default:
+        return {
+          name: 'Actual - Projected',
+          type: 'arearange',
+          data: rangeData,
+          color: '#000000',
+          lineColor: '#ffffff',
+
+         };
+
+    
+};
+
+};
+
+
+
+
+
+function intersectionPoint(l1Pt1, l1Pt2, l2Pt1, l2Pt2){
+    
+    
+    //compute A B and C for the first line: AX + BY = C
+    A1 = l1Pt2.y-l1Pt1.y;
+    B1 = l1Pt1.x-l1Pt2.x;
+    C1 = A1*l1Pt1.x + B1 *l1Pt1.y;
+    
+    //compute A B and C for the second line
+    A2 = l2Pt2.y - l2Pt1.y;
+    B2 = l2Pt1.x - l2Pt2.x;
+    C2 = A2*l2Pt1.x + B2*l2Pt1.y;
+    
+    var delta = A1*B2 - A2*B1;
+    if(delta == 0) {
+        console.log("Lines are parallel");
+        return null;
+    }
+    else
+    {
+        return {
+            x: (B2*C1 - B1*C2)/delta,
+            y: (A1*C2 - A2*C1)/delta
+        };    
+    }
+
+};
+
+
+
+
+
+
+
+//]]> 
+
+</script>
+
+  
+</head>
+
+<body>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 400px; height: 1000px; margin: 0 auto"></div>
+
+  
+</body>
+
+</html>
+
